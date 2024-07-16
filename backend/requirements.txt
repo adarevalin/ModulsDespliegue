@@ -1,2 +1,5 @@
-pip install -r backend/requirements.txt
-npm install --prefix frontend && npm run build --prefix frontend
+fastapi
+uvicorn
+tensorflow
+pillow
+numpy
