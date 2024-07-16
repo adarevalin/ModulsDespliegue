@@ -13,9 +13,9 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://modulsfrontend.onrender.com"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_credentials=False,
+    allow_methods=False,
+    allow_headers=False,
 )
 
 # Verifica la ruta actual
