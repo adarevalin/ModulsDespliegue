@@ -42,7 +42,10 @@ if os.path.exists(label_encoder_path):
 else:
     print(f"No se pudo encontrar el archivo {label_encoder_path}.")
 
-
+@app.get("/")
+async def root():
+    return {"message": "API está funcionando"}
+    
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
     try:
