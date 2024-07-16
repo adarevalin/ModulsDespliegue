@@ -16,11 +16,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Cargar el modelo de Keras
-model = load_model(r'backend\\model_066.h5')
+import os
+
+# Verifica la ruta actual
+print(os.getcwd())
+
+# Intenta abrir el modelo
+model_path = 'backend/model_066.h5'
+if os.path.exists(model_path):
+    print(f"El archivo {model_path} existe.")
+    # Cargar el modelo
+    model = load_model(model_path)
+else:
+    print(f"No se pudo encontrar el archivo {model_path}.")
 
 # Cargar el LabelEncoder
-with open(r'backend\\label_encoder.pkl', 'rb') as file:
+with open(r'backend/label_encoder.pkl', 'rb') as file:
     encoder = pickle.load(file)
 
 @app.post("/predict/")
