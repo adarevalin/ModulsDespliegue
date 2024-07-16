@@ -17,10 +17,10 @@ app.add_middleware(
 )
 
 # Cargar el modelo de Keras
-model = load_model(r'backend//model_066.h5')
+model = load_model(r'backend\\model_066.h5')
 
 # Cargar el LabelEncoder
-with open(r'backend//label_encoder.pkl', 'rb') as file:
+with open(r'backend\\label_encoder.pkl', 'rb') as file:
     encoder = pickle.load(file)
 
 @app.post("/predict/")
