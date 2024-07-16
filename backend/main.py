@@ -4,6 +4,7 @@ from keras.models import load_model
 from PIL import Image
 import numpy as np
 import pickle
+import os
 
 app = FastAPI()
 
@@ -16,7 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-import os
 
 # Verifica la ruta actual
 print(os.getcwd())
@@ -30,9 +30,19 @@ if os.path.exists(model_path):
 else:
     print(f"No se pudo encontrar el archivo {model_path}.")
 
-# Cargar el LabelEncoder
-with open(r'backend/label_encoder.pkl', 'rb') as file:
-    encoder = pickle.load(file)
+# Verifica la ruta actual
+print(os.getcwd())
+
+# Intenta abrir el archivo label_encoder.pkl
+label_encoder_path = 'backend/label_encoder.pkl'
+if os.path.exists(label_encoder_path):
+    print(f"El archivo {label_encoder_path} existe.")
+    # Cargar el LabelEncoder
+    with open(label_encoder_path, 'rb') as file:
+        encoder = pickle.load(file)
+else:
+    print(f"No se pudo encontrar el archivo {label_encoder_path}.")
+
 
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
