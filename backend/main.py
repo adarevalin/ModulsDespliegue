@@ -3,9 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from keras.models import load_model
 from PIL import Image
 import numpy as np
-import os
 import pickle
-
+import os
 
 app = FastAPI()
 
