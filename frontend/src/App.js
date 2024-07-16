@@ -34,7 +34,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="https://i.imgur.com/V6MjBgT.png" alt="logo" className="logo" />
+        <img src="https://i.imgur.com/F8UzITO.png" alt="logo" className="logo" />
         <h1>scopeGenius</h1>
         <form onSubmit={handleSubmit} className="form">
           <label className="file-label">
