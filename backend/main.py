@@ -12,7 +12,7 @@ app = FastAPI()
 # Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Permite solicitudes desde esta URL
+    allow_origins=["https://modulsfrontend.onrender.com"],  # Permite solicitudes desde esta URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -23,7 +23,7 @@ app.add_middleware(
 print(os.getcwd())
 
 # Intenta abrir el modelo
-model_path = 'backend/model_066.h5'
+model_path = 'model_066.h5'
 if os.path.exists(model_path):
     print(f"El archivo {model_path} existe.")
     # Cargar el modelo
@@ -35,7 +35,7 @@ else:
 print(os.getcwd())
 
 # Intenta abrir el archivo label_encoder.pkl
-label_encoder_path = 'backend/label_encoder.pkl'
+label_encoder_path = 'label_encoder.pkl'
 if os.path.exists(label_encoder_path):
     print(f"El archivo {label_encoder_path} existe.")
     # Cargar el LabelEncoder
