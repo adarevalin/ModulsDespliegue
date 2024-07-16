@@ -11,6 +11,7 @@ app = FastAPI()
 
 # Configurar CORS para HTTP
 app.add_middleware(
+    CORSMiddleware,
     allow_origins=["https://modulsfrontend.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
