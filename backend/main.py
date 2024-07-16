@@ -11,15 +11,11 @@ app = FastAPI()
 
 # Configurar CORS para HTTP
 app.add_middleware(
-    CORSMiddleware,
     allow_origins=["https://modulsfrontend.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Configurar CORS para WebSockets
-app.add_middleware(WebSocketMiddleware, allow_origins=["https://modulsfrontend.onrender.com"])
 
 # Verifica la ruta actual
 print(os.getcwd())
