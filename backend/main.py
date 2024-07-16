@@ -9,13 +9,12 @@ import os
 app = FastAPI()
 
 
-# Configurar CORS para HTTP
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://modulsfrontend.onrender.com"],
-    allow_credentials=False,
-    allow_methods=False,
-    allow_headers=False,
+    allow_origins=["*"],  # Permitir todas las solicitudes de origen
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Verifica la ruta actual
