@@ -21,14 +21,6 @@ app.add_middleware(
 # Configurar CORS para WebSockets
 app.add_middleware(WebSocketMiddleware, allow_origins=["https://modulsfrontend.onrender.com"])
 
-# Ejemplo de ruta WebSocket
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
-    await websocket.accept()
-    while True:
-        data = await websocket.receive_text()
-        await websocket.send_text(f"Mensaje recibido: {data}")
-
 # Verifica la ruta actual
 print(os.getcwd())
 
