@@ -20,7 +20,7 @@ function App() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post('http://localhost:8000/predict/', formData, {
+      const response = await axios.post('https://modulsdespliegue.onrender.com/predict/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
