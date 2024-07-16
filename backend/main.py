@@ -8,15 +8,26 @@ import os
 
 app = FastAPI()
 
-# Configurar CORS
+
+# Configurar CORS para HTTP
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://modulsfrontend.onrender.com"],  # Permite solicitudes desde esta URL
+    allow_origins=["https://modulsfrontend.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Configurar CORS para WebSockets
+app.add_middleware(WebSocketMiddleware, allow_origins=["https://modulsfrontend.onrender.com"])
+
+# Ejemplo de ruta WebSocket
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        data = await websocket.receive_text()
+        await websocket.send_text(f"Mensaje recibido: {data}")
 
 # Verifica la ruta actual
 print(os.getcwd())
