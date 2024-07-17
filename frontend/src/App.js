@@ -31,6 +31,18 @@ function App() {
     }
   };
 
+  // Script de keep-alive
+  useEffect(() => {
+    const interval = setInterval(() => {
+      axios.get('https://modulsfrontend.onrender.com/')
+        .then(response => console.log('Manteniendo la página activa'))
+        .catch(error => console.error('Error al enviar keep-alive', error));
+    }, 40000); // Enviar cada 60 segundos
+
+    return () => clearInterval(interval);
+    
+  }, []);
+  
   return (
     <div className="App">
       <header className="App-header">
