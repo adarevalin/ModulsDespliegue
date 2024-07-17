@@ -5,9 +5,10 @@ from PIL import Image
 import numpy as np
 import pickle
 import os
+import httpx
+import asyncio
 
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -59,3 +60,19 @@ async def predict(file: UploadFile = File(...)):
         return {"prediction": predicted_label}
     except Exception as e:
         return {"error": str(e)}
+
+# Función para mantener el servidor despierto
+async def keep_server_awake():
+    while True:
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.get("https://modulsdespliegue.onrender.com/")
+                print("Solicitud periódica para mantener el servidor despierto:", response.status_code)
+        except Exception as e:
+            print("Error en la solicitud para mantener el servidor despierto:", str(e))
+        await asyncio.sleep(30)  # Cada 30 segundos
+
+# Iniciar la función de mantener despierto al arrancar el servidor
+@app.on_event("startup")
+async def startup_event():
+    asyncio.create_task(keep_server_awake())
