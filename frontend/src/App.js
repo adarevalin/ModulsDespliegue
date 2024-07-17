@@ -53,7 +53,7 @@ function App() {
             Choose File
             <input type="file" onChange={handleFileChange} className="file-input" />
           </label>
-          <button type="submit" className="submit-Ñbutton">Upload and Predict</button>
+          <button type="submit" className="submit-button">Upload and Predict</button>
         </form>
         {preview && <img src={preview} alt="preview" className="image-preview" />}
         {prediction && <h2 className="prediction">Prediction: {prediction}</h2>}
