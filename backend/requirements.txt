@@ -3,4 +3,5 @@ uvicorn
 tensorflow
 pillow
 numpy
-os
+pyyaml
+scikit-learn

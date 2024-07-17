@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css'; // Para los estilos CSS personalizados
 
@@ -20,7 +20,7 @@ function App() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post('http://localhost:8000/predict/', formData, {
+      const response = await axios.post('https://modulsdespliegue.onrender.com/predict/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -31,10 +31,22 @@ function App() {
     }
   };
 
+  // Script de keep-alive
+  useEffect(() => {
+    const interval = setInterval(() => {
+      axios.get('https://modulsfrontend.onrender.com/')
+        .then(response => console.log('Manteniendo la página activa'))
+        .catch(error => console.error('Error al enviar keep-alive', error));
+    }, 40000); // Enviar cada 60 segundos
+
+    return () => clearInterval(interval);
+    
+  }, []);
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src="https://i.imgur.com/na2UuZd.png" alt="logo" className="logo" />
+        <img src="https://i.imgur.com/F8UzITO.png" alt="logo" className="logo" />
         <h1>scopeGenius</h1>
         <form onSubmit={handleSubmit} className="form">
           <label className="file-label">

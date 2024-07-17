@@ -4,25 +4,48 @@ from keras.models import load_model
 from PIL import Image
 import numpy as np
 import pickle
+import os
 
 app = FastAPI()
 
-# Configurar CORS
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Permite solicitudes desde esta URL
+    allow_origins=["*"],  # Permitir todas las solicitudes de origen
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Cargar el modelo de Keras
-model = load_model(r'C:\\Users\\Public\\Proyectos\\modelo_panel_solar\\appWeb\\modulspanels\\backend\\model_066.h5')
+# Verifica la ruta actual
+print(os.getcwd())
 
-# Cargar el LabelEncoder
-with open(r'C:\\Users\\Public\\Proyectos\\modelo_panel_solar\\appWeb\\modulspanels\\backend\\label_encoder.pkl', 'rb') as file:
-    encoder = pickle.load(file)
+# Intenta abrir el modelo
+model_path = 'model_066.h5'
+if os.path.exists(model_path):
+    print(f"El archivo {model_path} existe.")
+    # Cargar el modelo
+    model = load_model(model_path)
+else:
+    print(f"No se pudo encontrar el archivo {model_path}.")
 
+# Verifica la ruta actual
+print(os.getcwd())
+
+# Intenta abrir el archivo label_encoder.pkl
+label_encoder_path = 'label_encoder.pkl'
+if os.path.exists(label_encoder_path):
+    print(f"El archivo {label_encoder_path} existe.")
+    # Cargar el LabelEncoder
+    with open(label_encoder_path, 'rb') as file:
+        encoder = pickle.load(file)
+else:
+    print(f"No se pudo encontrar el archivo {label_encoder_path}.")
+
+@app.get("/")
+async def root():
+    return {"message": "API está funcionando"}
+    
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
     try:
