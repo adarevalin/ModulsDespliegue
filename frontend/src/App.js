@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import './App.css'; // Para los estilos CSS personalizados
 
@@ -30,18 +30,6 @@ function App() {
       console.error('Error uploading the file', error);
     }
   };
-
-  // Script de keep-alive
-  useEffect(() => {
-    const interval = setInterval(() => {
-      axios.get('https://modulsfrontend.onrender.com/')
-        .then(response => console.log('Manteniendo la página activa'))
-        .catch(error => console.error('Error al enviar keep-alive', error));
-    }, 40000); // Enviar cada 60 segundos
-
-    return () => clearInterval(interval);
-    
-  }, []);
   
   return (
     <div className="App">
