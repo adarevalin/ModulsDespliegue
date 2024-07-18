@@ -70,7 +70,7 @@ async def keep_server_awake():
                 print("Solicitud periódica para mantener el servidor despierto:", response.status_code)
         except Exception as e:
             print("Error en la solicitud para mantener el servidor despierto:", str(e))
-        await asyncio.sleep(30)  # Cada 30 segundos
+        await asyncio.sleep(30000)  # Cada 30 segundos
 
 # Iniciar la función de mantener despierto al arrancar el servidor
 @app.on_event("startup")
